@@ -192,9 +192,11 @@ class Graphe:
 
     def html_chemin(self, chemin):
         html = "<ul>"
-        for i, c in enumerate(chemin):
-            html == "<li> Origine : {}, Extremite : {}, Poids : {}</li>".format(c, chemin[i + 1],
-                                                                                self.poids(c, chemin[i + 1]))
+        for i in range(0, len(chemin) - 1):
+            c = chemin[i]
+            c2 = chemin[i + 1]
+            html += "<li> Origine : {}, Extremite : {}, Poids : {}</li>".format(c, c2 ,
+                                                                                self.poids(c,c2 ))
         html += "</ul>"
         return html
 
@@ -208,14 +210,27 @@ class Graphe:
         html += "</table>"
         return html
 
-    def graphviz(self):
-        g = gv.Digraph(format='svg')
+
+
+    def graphviz_chemin(self, chemin):
+        # retirer pour reutiliser en "standalone"
+        return ""
+        # on trace une premiere fois le graphe full black
+        g = gv.Digraph(format='png')
         for s in self.sommets:
             g.node(s.nom)
-        for arc in self.arcs:
-            g.edge(arc.depart, arc.arrive, label=str(arc.poids))
-        g.render('graph.gv', view=True)
-        return g
+        for a in self.arcs:
+            g.edge(a.depart, a.arrive, label=str(a.poids))
+
+        # puis on rajooute le chemin en rouge
+        for i in range(0, len(chemin) - 1):
+            c = chemin[i]
+            c2 = chemin[i + 1]
+            g.edge(c, c2, color="red")
+        # on enregistre le graphe
+        g.render('graphviz_raw.gv', view=False)
+        # on retourne le code html
+        return "<img src='graphviz_raw.gv.png' alt='graph' />"
 
     def html_render(self, tableau_distances, chemin_max, distance_max):
         # on genere le fichier html si il n'existe pas
@@ -230,16 +245,22 @@ class Graphe:
 </head>
 <body>
     <h1>TP-Graphes</h1>
-    <h2>Graphe étudié: {}</h2>
-    {}
-    <p>Plus long des plus courts chemins est représenté en rouge</p>
+    <h2>Graphe etudie: {}</h2>
+    {}<img src="graphviz.svg" alt="graph" />
+    <p>Plus long des plus courts chemins est represente en rouge</p>
     <h2>Plus long des plus courts chemins entre {} et {} : distance de {}</h2>    
     <p> arcs contenus dans le chemin : </p>
     <p>{}</p>
+   
     <h2>Distances minimales entre les sommets</h2>
     {}
 </body>
-</html>""".format(self.nom, self.graphviz(), chemin_max[0], chemin_max[-1],
+<style>
+    table, th, td {{
+        border: 1px solid black;
+        border-collapse: collapse;
+    }}
+</html>""".format(self.nom, self.graphviz_chemin(chemin_max), chemin_max[0], chemin_max[-1],
                   distance_max, self.html_chemin(chemin_max), self.html_tableau_distances(tableau_distances))
 
         with open('index.html', 'w') as fichier_html:

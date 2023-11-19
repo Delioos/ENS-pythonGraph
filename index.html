@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>TP-Graphes</title>
+</head>
+<body>
+    <h1>TP-Graphes</h1>
+    <h2>Graphe etudie: Graphe1</h2>
+    <img src="graphviz.svg" alt="graph" />
+    <p>Plus long des plus courts chemins est represente en rouge</p>
+    <h2>Plus long des plus courts chemins entre G et J : distance de 21</h2>    
+    <p> arcs contenus dans le chemin : </p>
+    <p><ul><li> Origine : G, Extremite : H, Poids : 2</li><li> Origine : H, Extremite : B, Poids : 6</li><li> Origine : B, Extremite : E, Poids : 6</li><li> Origine : E, Extremite : I, Poids : 3</li><li> Origine : I, Extremite : J, Poids : 4</li></ul></p>
+   
+    <h2>Distances minimales entre les sommets</h2>
+    <table><tr><td>-</td><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td><td>H</td><td>I</td><td>J</td></tr><tr><td>A</td><td>0</td><td>5</td><td>8</td><td>9</td><td>10</td><td>10</td><td>13</td><td>15</td><td>13</td><td>17</td></tr><tr><td>B</td><td>11</td><td>0</td><td>6</td><td>7</td><td>6</td><td>8</td><td>11</td><td>13</td><td>9</td><td>13</td></tr><tr><td>C</td><td>7</td><td>2</td><td>0</td><td>1</td><td>2</td><td>2</td><td>5</td><td>7</td><td>5</td><td>9</td></tr><tr><td>D</td><td>7</td><td>12</td><td>15</td><td>0</td><td>2</td><td>1</td><td>4</td><td>6</td><td>5</td><td>9</td></tr><tr><td>E</td><td>5</td><td>10</td><td>13</td><td>1</td><td>0</td><td>2</td><td>5</td><td>7</td><td>3</td><td>7</td></tr><tr><td>F</td><td>6</td><td>11</td><td>14</td><td>2</td><td>1</td><td>0</td><td>3</td><td>5</td><td>4</td><td>8</td></tr><tr><td>G</td><td>19</td><td>8</td><td>14</td><td>15</td><td>14</td><td>16</td><td>0</td><td>2</td><td>17</td><td>21</td></tr><tr><td>H</td><td>17</td><td>6</td><td>12</td><td>13</td><td>12</td><td>14</td><td>17</td><td>0</td><td>15</td><td>19</td></tr><tr><td>I</td><td>inf</td><td>inf</td><td>inf</td><td>inf</td><td>inf</td><td>inf</td><td>inf</td><td>inf</td><td>0</td><td>4</td></tr><tr><td>J</td><td>inf</td><td>inf</td><td>inf</td><td>inf</td><td>inf</td><td>inf</td><td>inf</td><td>inf</td><td>5</td><td>0</td></tr></table>
+</body>
+<style>
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+</html>
